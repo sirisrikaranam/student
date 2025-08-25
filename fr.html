@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #image-preview {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload an Image</h2>
+    <input type="file" id="image-input" accept="image/*">
+    <br>
+    <img id="image-preview" src="" alt="Image Preview" style="display: none;">
+    <br>
+    <h3 id="classification-result"></h3>
+
+    <script>
+        document.getElementById('image-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('image-preview');
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    classifyImage();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function classifyImage() {
+            // Simulated AI model logic (Random classification)
+            const result = Math.random() > 0.5 ? "Real" : "Fake";
+            document.getElementById('classification-result').innerText = "Classified as: " + result;
+        }
+    </script>
+</body>
+</html>
